@@ -214,7 +214,9 @@ if __name__ == "__main__":
         except:
             
             timesParsed.append(np.nan)
-    
+            
+    pt.ylabel("Snow Height (cm)")
+    pt.xlabel("Decimal Date")
     pt.plot(timesParsed, data)
 
 
