@@ -196,7 +196,18 @@ def toDecimalDate(date, snotel=False):
         num = num if snotel else num + 2000
         return num
 
+def getAltitude(iButtonNum, year: str):
 
+    if year not in ["2018", "2019", "2020", "2021", "2022"]:
+        raise Exception()
+
+    df = pd.read_csv("alldata//data//altitudes//altitudes" +
+                     year + ".csv", encoding="latin1")
+
+    if not np.isnan(df.at[iButtonNum - 1, "Altitude (meters)"]):
+        return df.at[iButtonNum - 1, "Altitude (meters)"]
+
+    raise Exception("No altitude data.")
 
 # inputs: site, description (Buried, Exposed, Shaded), year range, false to throw an exception when
 # missing data, true to just ignore it
