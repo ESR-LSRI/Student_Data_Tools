@@ -217,6 +217,7 @@ if __name__ == "__main__":
             
     pt.ylabel("Temperature (C)")
     pt.xlabel("Decimal Date")
+    pt.ticklabel_format(style='plain', useOffset=False) 
     pt.plot(timesParsed, data)
 
 
