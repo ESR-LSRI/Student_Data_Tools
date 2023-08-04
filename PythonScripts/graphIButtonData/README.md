@@ -1,1 +1,1 @@
-"Data" folder must be in the same directory as python script to function correctly.
+"Data" folder must be in the same directory as python script to function correctly. Do not save the files in a local .csv editor or the data will get corrupted. If that happens, just download the data folder again.
