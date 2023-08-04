@@ -198,7 +198,7 @@ def toDecimalDate(date, snotel=False):
         return num
 
 
-
+#in case file is imported, but why would you do that? :(
 if __name__ == "__main__":
     
     #for cmd args
