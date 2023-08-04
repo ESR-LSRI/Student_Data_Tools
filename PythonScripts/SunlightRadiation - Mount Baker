@@ -1,0 +1,45 @@
+
+"""
+Created on Mon Jul 17 10:46:47 2023
+
+Read Mt. Baker Data
+
+@author: michaeltown
+"""
+
+# libraries
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import os as os
+import pickle
+# location of data
+file_path = 'C:\\Users\\KaidenP26\\OneDrive - Lakeside School\\Documents\\GitHub\\2023_KaidenP\\data\\2021-2022_pkl'
+fileNames = os.listdir(file_path)
+# colNames = [c[:-4] for f in fileNames]
+
+
+os.chdir(file_path)
+
+# read the file
+df2 = pd.read_pickle(fileNames[6])
+df2 = df2.resample('D').mean()
+df1 = pd.read_pickle(fileNames[7])
+# create datetime variable, set as index
+df1['staT'] = df1.Value.resample('D').std()
+df1.loc[(df1.Value < 0.01) & (df1.Value > -.501),'Value'] = np.nan
+df1 = df1.resample('D').mean()
+df3 = df1-df2
+df4 = df3*37.5
+plt.figure()
+plt.plot(df4.index,df4.Value)
+plt.xlabel('Time')
+plt.ylabel('Solar Radiation (W/m^2)')
+# plt.ylabel('Sunniness Level/Radiation (W/m^2)')
+
+# df = pd.DataFrame(columns = c)
+# # read in files
+# for f in fileNames:
+#     df[f[:-4]] = pd.read_csv(f,header = 14)
+
