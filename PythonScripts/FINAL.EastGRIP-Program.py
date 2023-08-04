@@ -16,6 +16,7 @@ import pandas as pd
 import os as os
 
 # location of data
+# to insert different data, include your own data path
 fileLoc = 'C:\\Users\\laelg\\OneDrive\\Documents\\GitHub\\2023_LaelG_LSRI_EastGRIP\\data\\'
 fileNames = os.listdir(fileLoc)
 # colNames = [c[:-4] for f in fileNames]
@@ -47,7 +48,7 @@ def windPlot(df,ind,title):
     axWr = WindroseAxes(fig1,[1,1,1,1])
     fig1.add_axes(axWr)
     # graphing data points 
-    # setting graph qualities
+    # setting graph qualities (can change graph and edge colors, increments of speed, etc.)
     if len(ind) == 0:
         axWr.bar(df.wdir_u, df.wspd_u,  normed = False,
                  edgecolor='white',bins=np.arange(0, 12, 2),cmap=cm.YlGnBu)
