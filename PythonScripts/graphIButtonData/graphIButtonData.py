@@ -9,6 +9,7 @@ Graphs iButton data
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pt
+import sys
 
 iButtons = pd.read_csv("data/iButtons.csv")
 descLoc = {
@@ -196,25 +197,17 @@ def toDecimalDate(date, snotel=False):
         num = num if snotel else num + 2000
         return num
 
-def getAltitude(iButtonNum, year: str):
 
-    if year not in ["2018", "2019", "2020", "2021", "2022"]:
-        raise Exception()
-
-    df = pd.read_csv("alldata//data//altitudes//altitudes" +
-                     year + ".csv", encoding="latin1")
-
-    if not np.isnan(df.at[iButtonNum - 1, "Altitude (meters)"]):
-        return df.at[iButtonNum - 1, "Altitude (meters)"]
-
-    raise Exception("No altitude data.")
-
-# inputs: site, description (Buried, Exposed, Shaded), year range, false to throw an exception when
-# missing data, true to just ignore it
 
 if __name__ == "__main__":
-
-    data, times = getDataYears(1, "Exposed", "2018-2021", True)
+    
+    #for cmd args
+    #data, times = getDataYears(int(sys.argv[1]), sys.argv[2], sys.argv[3], True)
+    
+    
+    # inputs: site, description (Buried, Exposed, Shaded), year range, false to throw an exception when
+    # missing data, true to just ignore it
+    data, times = getDataYears(1, "Exposed", "2018-2020", True)
     timesParsed = []
     for x in times:
         
@@ -230,5 +223,8 @@ if __name__ == "__main__":
     pt.xlabel("Decimal Date")
     pt.ticklabel_format(style='plain', useOffset=False) 
     pt.plot(timesParsed, data)
+    
+    pt.show()
 
+   
 
