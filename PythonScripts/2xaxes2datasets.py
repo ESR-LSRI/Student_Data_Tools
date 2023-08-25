@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Jul 27 09:36:29 2023
-This program takes data from two datasets and makes a scatterpolt with a trendline where 
-the R2 and slope are printed
+Created on Wed Jul 19 08:42:58 2023
 
 @author: sarah
 """
-
 
 
 
@@ -66,42 +62,11 @@ dfegp.drop(['z_boom_u','qh_u', 'wspd_u','wdir_u','p_u', 't_u',
 dfegp.drop(['time'],axis = 'columns',inplace = True)
 dfegp.drop
 # plotting the x and y axises
-
-##If you want to change variables change all rh_us or Somic_means to you desired variable in
-##Df.drop or dfegp.drop, replace your disired variable with rh_u in egp or Sonic_mean in 
-## df then repalce all the Sonic_means or rh_us in program with desired variable
+##To be clear, the labes and points do not have to be in light coral for this to work
 plt.figure()
 df3 = dfegp.dropna(subset=["rh_u"])
 df4 = df.dropna(subset=["Sonic_mean"])
-##To havd data in continuous line delete "'.',alpha=0.5,"
-##To be clear 
-plt.plot(dfegp.rh_u,df.Sonic_mean,'.',alpha=0.5, color='lightcoral')
-#Labels! Yay!! Yay for labels!
+plt.plot(dfegp.rh_u,df.Sonic_mean, '.',alpha=(0.6), color='lightcoral')
+#Labels!
 plt.xlabel('Relitive Humidity (%)',color='lightcoral',size=16)
 plt.ylabel('Sonic Mean',color='lightcoral',size=16)
-
-
-#Trendline poltting
-df3['datetime'] = df3.index
-x = df3.rh_u
-y = df4.Sonic_mean
-y = y.values.reshape(len(y), 1);  
-x = x.values.reshape(len(y), 1);       
-modelT = LinearRegression();
-resultsT = modelT.fit(x,y);
-yModel = resultsT.predict(x);
-slope = resultsT.coef_
-intercept = resultsT.intercept_
-
-#Caculating the R2 and Slope of trendline (also change thses if variable change)
-r2 = resultsT.score(x,df4.Sonic_mean)
-plt.plot(df3.rh_u,x*slope+intercept,color = 'darkcyan')
-##If you change variables you would also want to change the labels for this
-print("SM vs RH R2 Monthly: " + str(r2))
-print("SM vs RH Slope Monthly: " + str(slope))
-
-# df = pd.DataFrame(columns = c)
-# # read in files
-# for f in fileNames:
-#     df[f[:-4]] = pd.read_csv(f,header = 14)
- 
